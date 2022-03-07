@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Restaurant Details Response Wrapper SkipTheDishes",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "shortName": {
+      "type": "string"
+    },
+    "location": {
+      "title": "Restaurant Details Response Location SkipTheDishes",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "address": {
+          "type": "string"
+        },
+        "address1": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        }
+      }
+    },
+    "isDelco": {
+      "type": "boolean"
+    },
+    "online": {
+      "type": "boolean"
+    },
+    "cleanUrl": {
+      "type": "string"
+    },
+    "skipScore": {
+      "type": "number"
+    },
+    "cuisines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "imageUrls": {
+      "title": "Restaurant Details Response Image Urls SkipTheDishes",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "menuImageListUrl": {
+          "type": "string"
+        },
+        "menuImageLargeUrl": {
+          "type": "string"
+        },
+        "menuImageMediumUrl": {
+          "type": "string"
+        },
+        "menuImageSmallUrl": {
+          "type": "string"
+        },
+        "listImageWebUrl": {
+          "type": "string"
+        },
+        "listImageMobileUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "acceptsPickup": {
+      "type": "boolean"
+    },
+    "foodPrepMinutes": {
+      "type": "number"
+    },
+    "isOpen": {
+      "type": "boolean"
+    },
+    "timeZone": {
+      "type": "string"
+    },
+    "acceptedPaymentTypes": {
+      "title": "Restaurant Details Response Accepted Payment Types SkipTheDishes",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "acceptsCreditCard": {
+          "type": "boolean"
+        },
+        "acceptsCash": {
+          "type": "string"
+        },
+        "acceptsInteracOnline": {
+          "type": "boolean"
+        },
+        "acceptsCorporate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "contactInfo": {
+      "title": "Restaurant Details Response Contact Info SkipTheDishes",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "currency": {
+      "title": "Restaurant Details Response Currency SkipTheDishes",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "currencyCode": {
+          "type": "string"
+        }
+      }
+    },
+    "menuItemSpecialInstructions": {
+      "type": "boolean"
+    },
+    "restaurantGroupId": {
+      "type": "string"
+    },
+    "estimatedTime": {
+      "type": "number"
+    },
+    "minEstimatedTime": {
+      "type": "number"
+    },
+    "maxEstimatedTime": {
+      "type": "number"
+    },
+    "menu": {
+      "title": "Restaurant Details Response Menu SkipTheDishes",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "menuGroups": {
+          "type": "array",
+          "items": {
+            "title": "Restaurant Details Response Menu Group SkipTheDishes",
+            "type": "object",
+            "required": [],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "menuItems": {
+                "type": "array",
+                "items": {
+                  "title": "Restaurant Details Response Menu Item SkipTheDishes",
+                  "type": "object",
+                  "required": [],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "centsPrice": {
+                      "type": "number"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "available": {
+                      "type": "boolean"
+                    },
+                    "imageUrl": {
+                      "type": "string"
+                    },
+                    "mediumImageUrl": {
+                      "type": "string"
+                    },
+                    "smallImageUrl": {
+                      "type": "string"
+                    },
+                    "isPrimary": {
+                      "type": "string"
+                    },
+                    "removed": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "timeZone": {
+          "type": "string"
+        }
+      }
+    },
+    "hasMenuPhoto": {
+      "type": "boolean"
+    },
+    "distance": {
+      "type": "string"
+    },
+    "fees": {
+      "type": "array",
+      "items": {
+        "title": "Restaurant Details Response Fee SkipTheDishes",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "orderMinimumCents": {
+            "type": "number"
+          },
+          "feeCents": {
+            "type": "number"
+          },
+          "skipSubsidy": {
+            "type": "number"
+          },
+          "restaurantSubsidy": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "times": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "isNew": {
+      "type": "string"
+    },
+    "acceptsAlcoholStackedOrder": {
+      "type": "boolean"
+    },
+    "restaurantCustomTaxes": {
+      "type": "array",
+      "items": {
+        "title": "Restaurant Details Response Custom Tax SkipTheDishes",
+        "type": "object",
+        "required": [],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "priceCategory": {
+            "type": "string"
+          },
+          "taxRate": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "restaurantType": {
+      "type": "string"
+    }
+  }
+}

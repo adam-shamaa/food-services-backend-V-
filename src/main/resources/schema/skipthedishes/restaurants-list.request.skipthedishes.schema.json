@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Restaurants List Request Wrapper SkipTheDishes",
+  "type": "object",
+  "properties": {
+    "operationName": {
+      "type": "string"
+    },
+    "variables": {
+      "title": "Restaurants List Request Variable SkipTheDishes",
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "isDelivery": {
+          "type": "boolean"
+        },
+        "dateTime": {
+          "type": "number"
+        },
+        "search": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        }
+      }
+    },
+    "extensions": {
+      "title": "Restaurants List Request Extensions SkipTheDishes",
+      "type": "object",
+      "properties": {
+        "persistedQuery": {
+          "title": "Restaurants List Request PersistedQuery SkipTheDishes",
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "number"
+            },
+            "sha256Hash": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

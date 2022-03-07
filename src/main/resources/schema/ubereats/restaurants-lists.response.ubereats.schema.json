@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Restaurants List Response Wrapper Ubereats",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "title": "Restaurants List Response Data Ubereats",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "countdowns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "feedItems": {
+          "type": "array",
+          "items": {
+            "title": "Restaurants List Response Feed Item Ubereats",
+            "type": "object",
+            "required": [],
+            "properties": {
+              "uuid": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "carousel": {
+                "type": "object",
+                "title": "Restaurants List Response Carousel Ubereats",
+                "required": [],
+                "properties": {
+                  "stores": {
+                    "type": "array",
+                    "items": {
+                      "title": "Restaurants List Response Store Ubereats",
+                      "type": "object",
+                      "required": [],
+                      "properties": {
+                        "storeUuid": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "title": "Restaurants List Response Title Ubereats",
+                          "type": "object",
+                          "required": [],
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "rating": {
+                          "title": "Restaurants List Response Rating Ubereats",
+                          "required": [],
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            },
+                            "accessibilityText": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "meta": {
+                          "type": "array",
+                          "items": {
+                            "title": "Restaurants List Response Store Meta Ubereats",
+                            "type": "object",
+                            "required": [],
+                            "properties": {
+                              "textFormat": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "actionUrl": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "title": "Restaurants List Response Image Ubereats",
+                          "type": "object",
+                          "required": [],
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "title": "Restaurants List Response Image Property Ubereats",
+                                "type": "object",
+                                "required": [],
+                                "properties": {
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "meta2": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "header": {
+                    "title": "Restaurants List Response Header Ubereats",
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "title": {
+                        "title": "Restaurants List Response Title Ubereats",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "callToAction": {
+                        "title": "Restaurants List Response Call To Action Ubereats",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                          "text": {
+                            "type": "string"
+                          },
+                          "actionUrl": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "analyticsLabel": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "meta": {
+          "title": "Restaurants List Response Meta Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "offset": {
+              "type": "number"
+            },
+            "hasMore": {
+              "type": "boolean"
+            }
+          }
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "isInServiceArea": {
+          "type": "boolean"
+        },
+        "getFeedItemType": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "feedHeader": {
+          "title": "Restaurants List Response Feed Header Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {}
+        },
+        "cityName": {
+          "type": "string"
+        },
+        "cacheKey": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

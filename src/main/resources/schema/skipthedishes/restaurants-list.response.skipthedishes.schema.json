@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Restaurants List Response Wrapper SkipTheDishes",
+  "type": "object",
+  "properties": {
+    "data": {
+      "title": "Restaurants List Response Data SkipTheDishes",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "restaurantsList": {
+          "title": "Restaurants List Response Restaurants List SkipTheDishes",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "openRestaurants": {
+              "type": "array",
+              "items": {
+                "title": "Restaurants List Response Open Restaurants SkipTheDishes",
+                "type": "object",
+                "required": [],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "title": "Restaurants List Response Location SkipTheDishes",
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "title": "Restaurants List Response Position SkipTheDishes",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                          "latitude": {
+                            "type": "number"
+                          },
+                          "longitude": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "online": {
+                    "type": "boolean"
+                  },
+                  "isOpen": {
+                    "type": "boolean"
+                  },
+                  "cleanUrl": {
+                    "type": "string"
+                  },
+                  "estimatedTime": {
+                    "type": "number"
+                  },
+                  "minEstimatedTime": {
+                    "type": "number"
+                  },
+                  "maxEstimatedTime": {
+                    "type": "number"
+                  },
+                  "distance": {
+                    "title": "Restaurants List Response Distance SkipTheDishes",
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "value": {
+                        "type": "number"
+                      },
+                      "unit": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "skipScore": {
+                    "type": "number"
+                  },
+                  "fees": {
+                    "type": "array",
+                    "items": {
+                      "title": "Restaurants List Response Fee SkipTheDishes",
+                      "type": "object",
+                      "required": [],
+                      "properties": {
+                        "orderMinimumCents": {
+                          "type": "string"
+                        },
+                        "feeCents": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "cuisines": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "imageUrls": {
+                    "title": "Restaurants List Response Image SkipTheDishes",
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "listImageWebUrl": {
+                        "type": "string"
+                      },
+                      "listImageMobileUrl": {
+                        "type": "string"
+                      },
+                      "menuSmallUrl": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "defaultSort": {
+                    "type": "number"
+                  },
+                  "restaurantGroupId": {
+                    "type": "string"
+                  },
+                  "isSponsored": {
+                    "type": "boolean"
+                  },
+                  "isNew": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "cuisines": {
+              "type": "array",
+              "items": {
+                "title": "Restaurants List Response Cuisine SkipTheDishes",
+                "type": "object",
+                "required": [],
+                "properties": {
+                  "name": {
+                    "title": "Restaurants List Response Cuisine Name SkipTheDishes",
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "en": {
+                        "type": "string"
+                      },
+                      "fr": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Restaurant Details Response Wrapper Ubereats",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "title": "Restaurant Details Response Data",
+      "type": "object",
+      "required": [],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "citySlug": {
+          "type": "string"
+        },
+        "heroImageUrls": {
+          "type": "array",
+          "items": {
+            "title": "Restaurant Details Response Hero Image Url Ubereats",
+            "type": "object",
+            "required": [],
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "width": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "brandInfo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seoMeta": {
+          "title": "Restaurant Details Response Seo Meta Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "faqs": {
+              "type": "string"
+            },
+            "additionalContent": {
+              "type": "string"
+            }
+          }
+        },
+        "shouldIndex": {
+          "type": "boolean"
+        },
+        "location": {
+          "title": "Restaurant Details Response Location Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "streetAddress": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "postalCode": {
+              "type": "string"
+            },
+            "region": {
+              "type": "string"
+            },
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            },
+            "geo": {
+              "title": "Restaurant Details Response Geo Ubereats",
+              "type": "object",
+              "required": [],
+              "properties": {
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "neighborhood": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                }
+              }
+            },
+            "locationType": {
+              "type": "string"
+            }
+          }
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "isDeliveryThirdParty": {
+          "type": "string"
+        },
+        "isDeliveryOverTheTop": {
+          "type": "string"
+        },
+        "etaRange": {
+          "title": "Restaurant Details Response Eta Range Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "iconUrl": {
+              "type": "string"
+            },
+            "accessibilityText": {
+              "type": "string"
+            }
+          }
+        },
+        "fareBadge": {
+          "title": "Restaurant Details Response Fare Badge Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "text": {
+              "type": "string"
+            },
+            "textFormat": {
+              "type": "string"
+            },
+            "accessibilityText": {
+              "type": "string"
+            }
+          }
+        },
+        "rating": {
+          "title": "Restaurant Details Response Rating Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "ratingValue": {
+              "type": "number"
+            },
+            "reviewCount": {
+              "type": "string"
+            }
+          }
+        },
+        "eatsPassExclusionBadge": {
+          "title": "Restaurant Details Response Eats Pass Exclusion Badge Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "iconUrl": {
+              "type": "string"
+            },
+            "textFormat": {
+              "type": "string"
+            }
+          }
+        },
+        "indicatorIcons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storeInfoMetadata": {
+          "title": "Restaurant Details Response Store Info Metadata Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "rawRatingStats": {
+              "title": "Restaurant Details Response Raw Rating Stats Ubereats",
+              "type": "object",
+              "required": [],
+              "properties": {
+                "storeRatingScore": {
+                  "type": "number"
+                },
+                "ratingCount": {
+                  "type": "string"
+                }
+              }
+            },
+            "workingHoursTagline": {
+              "type": "string"
+            }
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categoryLinks": {
+          "type": "array",
+          "items": {
+            "title": "Restaurant Details Response Category Link Ubereats",
+            "type": "object",
+            "required": [],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "link": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "priceBucket": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isOpen": {
+          "type": "boolean"
+        },
+        "isPreview": {
+          "type": "string"
+        },
+        "closedMessage": {
+          "type": "string"
+        },
+        "sectionEntitiesMap": {
+          "title": "Restaurant Details Response Section Entities Map Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {}
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "title": "Restaurant Details Response Section Item Ubereats",
+            "type": "object",
+            "required": [],
+            "properties": {
+              "subsectionUuids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "subtitle": {
+                "type": "string"
+              },
+              "uuid": {
+                "type": "string"
+              },
+              "isTop": {
+                "type": "boolean"
+              },
+              "isOnSale": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "subsectionsMap": {
+          "title": "Restaurant Details Response Sub Section Map Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {}
+        },
+        "sanitizedTitle": {
+          "type": "string"
+        },
+        "cityId": {
+          "type": "number"
+        },
+        "cuisineList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "distanceBadge": {
+          "type": "string"
+        },
+        "fareInfo": {
+          "title": "Restaurant Details Response Fare Info Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "serviceFee": {
+              "type": "number"
+            },
+            "serviceFeeCents": {
+              "type": "number"
+            }
+          }
+        },
+        "isDeliveryBandwagon": {
+          "type": "string"
+        },
+        "disableOrderInstruction": {
+          "type": "string"
+        },
+        "disableCheckoutInstruction": {
+          "type": "string"
+        },
+        "nuggets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isWithinDeliveryRange": {
+          "type": "boolean"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "isFavorite": {
+          "type": "string"
+        },
+        "menuUUID": {
+          "type": "string"
+        },
+        "menuDisplayType": {
+          "type": "string"
+        },
+        "hasMultipleMenus": {
+          "type": "string"
+        },
+        "specialInstructionHintText": {
+          "type": "string"
+        },
+        "shouldRenderAllItems": {
+          "type": "boolean"
+        },
+        "eaterConsent": {
+          "type": "string"
+        },
+        "siteCustomizations": {
+          "type": "string"
+        },
+        "rating2": {
+          "type": "string"
+        },
+        "workingHoursTagline": {
+          "type": "string"
+        },
+        "catalogSectionsMap": {
+          "title": "Restaurant Details Response Catalog Section Map Ubereats",
+          "type": "object",
+          "required": [],
+          "additionalProperties": {
+            "title": "Restaurant Details Response Catalog Section Addtional Properties Ubereats",
+            "type": "array",
+            "items": {
+              "title": "Restaurant Details Response Catalog Ubereats",
+              "type": "object",
+              "required": [],
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "catalogSectionUUID": {
+                  "type": "string"
+                },
+                "payload": {
+                  "title": "Restaurant Details Response Catalog Payload Ubereats",
+                  "type": "object",
+                  "required": [],
+                  "properties": {
+                    "standardItemsPayload": {
+                      "title": "Restaurant Details Response Standard Item Payload Ubereats",
+                      "type": "object",
+                      "required": [],
+                      "properties": {
+                        "title": {
+                          "title": "Restaurant Details Response Standard Item Payload Title Ubereats",
+                          "type": "object",
+                          "required": [],
+                          "properties": {
+                            "text": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "spanCount": {
+                          "type": "number"
+                        },
+                        "catalogItems": {
+                          "type": "array",
+                          "items": {
+                            "title": "Restaurant Details Response Catalog Item Ubereats",
+                            "type": "object",
+                            "required": [],
+                            "properties": {
+                              "uuid": {
+                                "type": "string"
+                              },
+                              "imageUrl": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "itemDescription": {
+                                "type": "string"
+                              },
+                              "price": {
+                                "type": "number"
+                              },
+                              "spanCount": {
+                                "type": "number"
+                              },
+                              "displayType": {
+                                "type": "string"
+                              },
+                              "isSoldOut": {
+                                "type": "string"
+                              },
+                              "hasCustomizations": {
+                                "type": "boolean"
+                              },
+                              "numAlcoholicItems": {
+                                "type": "string"
+                              },
+                              "subsectionUuid": {
+                                "type": "string"
+                              },
+                              "isAvailable": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        },
+                        "sectionUUID": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "breadcrumbs": {
+          "title": "Restaurant Details Response Breadcrumb Ubereats",
+          "type": "object",
+          "required": [],
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "title": "Restaurant Details Response Breadcrumb Item Ubereats",
+                "type": "object",
+                "required": [],
+                "properties": {
+                  "href": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "metaJson": {
+              "type": "string"
+            }
+          }
+        },
+        "isGroupOrderingDisabled": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
