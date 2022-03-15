@@ -10,8 +10,7 @@ import java.util.Date;
 @Data
 @Builder
 public class RestaurantServiceProvider {
-    private String serviceProviderRestaurantId;
-    private ServiceProviderEnum serviceProvider;
-    @CreatedDate
-    private Date createdAt;
+  private String serviceProviderRestaurantId;
+  private ServiceProviderEnum serviceProvider;
+  @CreatedDate private Date createdAt;
 }

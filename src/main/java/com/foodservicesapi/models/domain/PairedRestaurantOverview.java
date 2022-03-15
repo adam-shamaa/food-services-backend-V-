@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @Builder
 public class PairedRestaurantOverview {
-    private String id;
-    private List<RestaurantOverview> serviceProviderRestaurants;
+  private String id;
+  private List<RestaurantOverview> serviceProviderRestaurants;
 }

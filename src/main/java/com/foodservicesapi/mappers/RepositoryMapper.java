@@ -12,35 +12,30 @@ import java.util.List;
 
 @Mapper
 public interface RepositoryMapper {
-    /*************************************** START - DOMAIN TO REPOSITORY ******************************************************/
+  /*************************************** START - DOMAIN TO REPOSITORY ******************************************************/
 
-    List<RestaurantServiceProvider> toRestaurantServiceProviderListRepository(List<RestaurantOverview> restaurantOverviewList);
-    @Mappings({
-        @Mapping(source="id", target="serviceProviderRestaurantId")
-    })
-    RestaurantServiceProvider toRestaurantServiceProviderRepository(RestaurantOverview restaurantOverview);
+  List<RestaurantServiceProvider> toRestaurantServiceProviderListRepository(
+      List<RestaurantOverview> restaurantOverviewList);
 
+  @Mappings({@Mapping(source = "id", target = "serviceProviderRestaurantId")})
+  RestaurantServiceProvider toRestaurantServiceProviderRepository(
+      RestaurantOverview restaurantOverview);
 
-    List<Restaurant> toRestaurantListRepository(List<PairedRestaurantOverview> pairedRestaurantOverview);
-    @Mappings({
-        @Mapping(source="serviceProviderRestaurants", target="serviceProviders")
-    })
-    Restaurant toRestaurantRepository(PairedRestaurantOverview pairedRestaurantOverview);
+  List<Restaurant> toRestaurantListRepository(
+      List<PairedRestaurantOverview> pairedRestaurantOverview);
 
-    /**************************************** END - DOMAIN TO REPOSITORY ******************************************************/
+  @Mappings({@Mapping(source = "serviceProviderRestaurants", target = "serviceProviders")})
+  Restaurant toRestaurantRepository(PairedRestaurantOverview pairedRestaurantOverview);
 
+  /**************************************** END - DOMAIN TO REPOSITORY ******************************************************/
 
-    /*************************************** START - REPOSITORY TO DOMAIN ******************************************************/
+  /*************************************** START - REPOSITORY TO DOMAIN ******************************************************/
 
-    @Mappings({
-        @Mapping(source="serviceProviders", target="serviceProviderRestaurants")
-    })
-    PairedRestaurantOverview toPairedRestaurantOverviewDomain(Restaurant restaurant);
+  @Mappings({@Mapping(source = "serviceProviders", target = "serviceProviderRestaurants")})
+  PairedRestaurantOverview toPairedRestaurantOverviewDomain(Restaurant restaurant);
 
-    @Mappings({
-        @Mapping(source="serviceProviderRestaurantId", target="id")
-    })
-    RestaurantOverview toRestaurantOverviewDomain(RestaurantServiceProvider restaurant);
+  @Mappings({@Mapping(source = "serviceProviderRestaurantId", target = "id")})
+  RestaurantOverview toRestaurantOverviewDomain(RestaurantServiceProvider restaurant);
 
-    /*************************************** END - REPOSITORY TO DOMAIN ******************************************************/
+  /*************************************** END - REPOSITORY TO DOMAIN ******************************************************/
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public interface ServiceProvider {
-    CompletableFuture<List<RestaurantOverview>> retrieveRestaurants(Address address);
-    CompletableFuture<Restaurant> retrieveRestaurant(String id, Address address);
+  CompletableFuture<List<RestaurantOverview>> retrieveRestaurants(Address address, String query);
+
+  CompletableFuture<Restaurant> retrieveRestaurant(String id, Address address);
 }

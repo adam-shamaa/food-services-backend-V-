@@ -32,9 +32,9 @@ public class RestaurantsService {
 
   /* ***********************************************  RestaurantLists  ************************************************ */
 
-  public List<PairedRestaurantOverview> getRestaurants(Address address) {
+  public List<PairedRestaurantOverview> getRestaurants(Address address, String searchQuery) {
     List<ServiceProvider> availableServiceProviders = getServiceProviders();
-    List<RestaurantOverview> availableRestaurants = fetchAndJoinRestaurantsFromServiceProviders(address, availableServiceProviders);
+    List<RestaurantOverview> availableRestaurants = fetchAndJoinRestaurantsFromServiceProviders(address, searchQuery, availableServiceProviders);
     Collection<List<RestaurantOverview>> listOfGroupedRestaurants = groupRestaurantOverviewsByAttributes(availableRestaurants);
     List<PairedRestaurantOverview> groupedRestaurantsDomainObjectList = groupedRestaurantsToPairedRestaurants(listOfGroupedRestaurants);
     saveRestaurants(groupedRestaurantsDomainObjectList);
@@ -45,8 +45,7 @@ public class RestaurantsService {
 
   public boolean saveRestaurants(List<PairedRestaurantOverview> pairedRestaurantOverviewList) {
     restaurantRepository.insert(
-        repositoryMapper.toRestaurantListRepository(
-            pairedRestaurantOverviewList));
+        repositoryMapper.toRestaurantListRepository(pairedRestaurantOverviewList));
     return true;
   }
 
@@ -75,18 +74,22 @@ public class RestaurantsService {
 
   // ********************************************************************************************************************
 
-  private List<RestaurantOverview> fetchAndJoinRestaurantsFromServiceProviders(Address address, List<ServiceProvider> serviceProviderList) {
+  private List<RestaurantOverview> fetchAndJoinRestaurantsFromServiceProviders(
+      Address address, String searchQuery, List<ServiceProvider> serviceProviderList) {
     return joinRestaurantOverviewListCompletableFutures(
-        fetchRestaurantsFromServiceProvidersList(address, serviceProviderList));
+        fetchRestaurantsFromServiceProvidersList(address, searchQuery, serviceProviderList));
   }
 
-  private List<CompletableFuture<List<RestaurantOverview>>> fetchRestaurantsFromServiceProvidersList(Address address, List<ServiceProvider> serviceProviderList) {
+  private List<CompletableFuture<List<RestaurantOverview>>>
+      fetchRestaurantsFromServiceProvidersList(
+          Address address, String searchQuery, List<ServiceProvider> serviceProviderList) {
     return serviceProviderList.stream()
-        .map(serviceProvider -> serviceProvider.retrieveRestaurants(address))
+        .map(serviceProvider -> serviceProvider.retrieveRestaurants(address, searchQuery))
         .collect(Collectors.toList());
   }
 
-  private List<RestaurantOverview> joinRestaurantOverviewListCompletableFutures(List<CompletableFuture<List<RestaurantOverview>>> completableFutureList) {
+  private List<RestaurantOverview> joinRestaurantOverviewListCompletableFutures(
+      List<CompletableFuture<List<RestaurantOverview>>> completableFutureList) {
     return CompletableFuture.allOf(completableFutureList.toArray(new CompletableFuture[0]))
         .thenApply(
             voidObject ->
@@ -118,7 +121,8 @@ public class RestaurantsService {
   }
 
   public List<com.foodservicesapi.models.domain.Restaurant> fetchAndJoinRestaurantDetailsFromServiceProviders(String restaurantID, Address address) {
-    return joinRestaurantDetailsListCompletableFutures(fetchRestaurantDetailList(fetchRestaurant(restaurantID), address));
+    return joinRestaurantDetailsListCompletableFutures(
+        fetchRestaurantDetailList(fetchRestaurant(restaurantID), address));
   }
 
   public List<CompletableFuture<com.foodservicesapi.models.domain.Restaurant>> fetchRestaurantDetailList(PairedRestaurantOverview pairedRestaurantOverview, Address address) {

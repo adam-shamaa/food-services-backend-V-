@@ -7,9 +7,9 @@ import lombok.*;
 @Data
 @RequiredArgsConstructor
 public class MenuItem {
-    private String name;
-    private String description;
-    private double price;
-    private CurrencyEnum currency;
-    private CurrencyUnitsEnum priceUnits;
+  private String name;
+  private String description;
+  private double price;
+  private CurrencyEnum currency;
+  private CurrencyUnitsEnum priceUnits;
 }

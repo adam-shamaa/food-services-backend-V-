@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Restaurants List Request Body Wrapper Ubereats",
+  "type": "object",
+  "properties": {
+    "cacheKey": {
+      "type": "string"
+    },
+    "feedSessionCount": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "announcementCount": {
+          "type": "string"
+        },
+        "announcementLabel": {
+          "type": "string"
+        }
+      }
+    },
+    "userQuery": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "startTime": {
+      "type": "string"
+    },
+    "endTime": {
+      "type": "string"
+    },
+    "carouselId": {
+      "type": "string"
+    },
+    "sortAndFilters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "marketingFeedType": {
+      "type": "string"
+    },
+    "billboardUuid": {
+      "type": "string"
+    },
+    "feedProvider": {
+      "type": "string"
+    },
+    "promotionUuid": {
+      "type": "string"
+    },
+    "targetingStoreTag": {
+      "type": "string"
+    },
+    "venueUuid": {
+      "type": "string"
+    },
+    "favorites": {
+      "type": "string"
+    },
+    "vertical": {
+      "type": "string"
+    },
+    "searchSource": {
+      "type": "string"
+    },
+    "getFeedItemType": {
+      "type": "string"
+    }
+  }
+}

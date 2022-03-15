@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @Builder
 public class Restaurant {
-    @Id
-    private String id;
-    private List<RestaurantServiceProvider> serviceProviders;
+  @Id private String id;
+  private List<RestaurantServiceProvider> serviceProviders;
 }

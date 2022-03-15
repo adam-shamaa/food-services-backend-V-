@@ -15,6 +15,7 @@
     <description>food-services-backend</description>
     <properties>
         <java.version>11</java.version>
+        <food-services-spec.version>2.11.0-SNAPSHOT</food-services-spec.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     </properties>
     <dependencies>
@@ -53,7 +54,7 @@
         <dependency>
             <groupId>org.food-services</groupId>
             <artifactId>api-spec</artifactId>
-            <version>1.7-SNAPSHOT</version>
+            <version>${food-services-spec.version}</version>
         </dependency>
 
         <dependency>
@@ -157,8 +158,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>

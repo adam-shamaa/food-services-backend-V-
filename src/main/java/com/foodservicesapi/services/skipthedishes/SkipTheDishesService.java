@@ -17,24 +17,26 @@ import java.util.concurrent.CompletableFuture;
 public class SkipTheDishesService implements ServiceProvider {
 
   private final SkipTheDishesClient skipTheDishesClient;
-  private final SkipTheDishesMapper skipTheDishesMapper = Mappers.getMapper(SkipTheDishesMapper.class);
+  private final SkipTheDishesMapper skipTheDishesMapper =
+      Mappers.getMapper(SkipTheDishesMapper.class);
 
   @Override
-  public CompletableFuture<List<RestaurantOverview>> retrieveRestaurants(Address address) {
-    return CompletableFuture.completedFuture(skipTheDishesMapper.toRestaurantOverviewDomainList(
+  public CompletableFuture<List<RestaurantOverview>> retrieveRestaurants(
+      Address address, String query) {
+    return CompletableFuture.completedFuture(
+        skipTheDishesMapper.toRestaurantOverviewDomainList(
             skipTheDishesClient
-                    .fetchRestaurantsLists(skipTheDishesMapper.toRestaurantsListRequest(address))
-                    .getData()
-                    .getRestaurantsList()
-                    .getOpenRestaurants()));
+                .fetchRestaurantsLists(skipTheDishesMapper.toRestaurantsListRequest(address), query)
+                .getData()
+                .getRestaurantsList()
+                .getOpenRestaurants()));
   }
 
   @Override
   public CompletableFuture<Restaurant> retrieveRestaurant(String id, Address address) {
-    return CompletableFuture.completedFuture(skipTheDishesMapper.toRestaurantDomain(
+    return CompletableFuture.completedFuture(
+        skipTheDishesMapper.toRestaurantDomain(
             skipTheDishesClient.fetchRestaurantDetails(
-                    skipTheDishesMapper.toRestaurantDetailsRequest(address, id)
-            )
-    ));
+                skipTheDishesMapper.toRestaurantDetailsRequest(address, id))));
   }
 }
