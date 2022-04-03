@@ -11,12 +11,12 @@ import java.net.URLEncoder;
 public class HttpUtils {
 
     @SneakyThrows
-    public String pojoToCookie(Object object) {
+    public String pojoToUrlEncodedString(Object object) {
         return URLEncoder.encode(new ObjectMapper().writeValueAsString(object), "UTF-8");
     }
 
     @SneakyThrows
-    public <T> T cookieToPojo(String cookie, Class<T> obj) {
+    public <T> T UrlEncodedStringToPojo(String cookie, Class<T> obj) {
         return new ObjectMapper().readValue(URLDecoder.decode(cookie, "UTF-8"), obj);
     }
 }

@@ -36,6 +36,7 @@ public class SkipTheDishesService implements ServiceProvider {
   public CompletableFuture<Restaurant> retrieveRestaurant(String id, Address address) {
     return CompletableFuture.completedFuture(
         skipTheDishesMapper.toRestaurantDomain(
+                null,
             skipTheDishesClient.fetchRestaurantDetails(
                 skipTheDishesMapper.toRestaurantDetailsRequest(address, id))));
   }

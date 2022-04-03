@@ -32,7 +32,7 @@ public class RestaurantsController implements RestaurantsApi {
   @Override
   public ResponseEntity<List<SummaryRestaurantResponse>> restaurantsGet(
       @NotNull String address, @Valid String searchQuery) {
-    Address addressPojo = httpUtils.cookieToPojo(address, Address.class);
+    Address addressPojo = httpUtils.UrlEncodedStringToPojo(address, Address.class);
     List<PairedRestaurantOverview> availableRestaurantsDomain =
         restaurantsService.getRestaurants(addressPojo, searchQuery);
     return ResponseEntity.ok(apiMapper.toRestaurantPreviewListDTO(availableRestaurantsDomain));
@@ -43,7 +43,7 @@ public class RestaurantsController implements RestaurantsApi {
       String temporaryRestaurantUUID,
       @javax.validation.constraints.NotNull String address,
       BigDecimal subtotal) {
-    Address addressPojo = httpUtils.cookieToPojo(address, Address.class);
+    Address addressPojo = httpUtils.UrlEncodedStringToPojo(address, Address.class);
     List<Restaurant> restaurantList =
         restaurantsService.getRestaurant(addressPojo, temporaryRestaurantUUID);
     return ResponseEntity.ok(

@@ -6,10 +6,7 @@ import com.foodservicesapi.models.domain.enums.CurrencyUnitsEnum;
 import com.foodservicesapi.models.domain.enums.FeeTypeEnum;
 import org.mapstruct.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Mapper
@@ -85,9 +82,10 @@ public interface UberEatsMapper {
     if (restaurant.getMeta2() != null) metaUbereatsList.addAll(restaurant.getMeta2());
     Optional<RestaurantsListResponseStoreMetaUbereats> text =
         metaUbereatsList.stream()
+            .filter(listItem -> listItem.getText() != null)
             .filter(listItem -> listItem.getText().contains("min"))
             .findFirst();
-    return text.isPresent()
+    return text != null && text.isPresent()
         ? Integer.parseInt(text.get().getText().split(" ")[0].split("–")[0])
         : -1;
   }
@@ -98,10 +96,11 @@ public interface UberEatsMapper {
     if (restaurant.getMeta() != null) metaUbereatsList.addAll(restaurant.getMeta());
     if (restaurant.getMeta2() != null) metaUbereatsList.addAll(restaurant.getMeta2());
     Optional<RestaurantsListResponseStoreMetaUbereats> text =
-        metaUbereatsList.stream()
-            .filter(listItem -> listItem.getText().contains("min"))
-            .findFirst();
-    return text.isPresent()
+            metaUbereatsList.stream()
+                    .filter(listItem -> listItem.getText() != null)
+                    .filter(listItem -> listItem.getText().contains("min"))
+                    .findFirst();
+    return text != null && text.isPresent()
         ? Integer.parseInt(text.get().getText().split(" ")[0].split("–")[1])
         : -1;
   }

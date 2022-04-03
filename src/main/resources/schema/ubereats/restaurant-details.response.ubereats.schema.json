@@ -192,12 +192,6 @@
             }
           }
         },
-        "indicatorIcons": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "storeInfoMetadata": {
           "title": "Restaurant Details Response Store Info Metadata Ubereats",
           "type": "object",

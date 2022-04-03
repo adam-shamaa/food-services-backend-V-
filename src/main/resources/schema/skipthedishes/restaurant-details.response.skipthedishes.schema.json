@@ -277,7 +277,8 @@
             "type": "string"
           },
           "priceCategory": {
-            "type": "string"
+            "type": "string",
+            "enum": ["CUSTOMER_SERVICE_FEE", "CUSTOMER_SERVICE_FEE_TAX"]
           },
           "taxRate": {
             "type": "number"

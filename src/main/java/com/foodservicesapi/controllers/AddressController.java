@@ -25,7 +25,7 @@ public class AddressController implements AddressApi {
   @Override
   public ResponseEntity<Void> addressPost(AddressRequest address) {
     httpServletResponse.addCookie(
-        new Cookie("address", httpUtils.pojoToCookie(apiMapper.toAddressDomain(address))));
+        new Cookie("address", httpUtils.pojoToUrlEncodedString(apiMapper.toAddressDomain(address))));
     return ResponseEntity.ok(null);
   }
 }

@@ -2,6 +2,7 @@ package com.foodservicesapi.mappers;
 
 import com.foodservicesapi.codegen.models.*;
 import com.foodservicesapi.models.domain.*;
+import com.foodservicesapi.models.domain.enums.FeeTypeEnum;
 import org.mapstruct.*;
 
 import java.util.ArrayList;
@@ -68,28 +69,28 @@ public interface SkipTheDishesMapper {
   // ------------------------------------ START - TO RestaurantDomain ---------------------------------------------
 
   @Mappings({
-    @Mapping(source = "name", target = "restaurantName"),
-    @Mapping(source = "menu.menuGroups", target = "menu"),
-    @Mapping(source = "location.address", target = "formattedAddress"),
+    @Mapping(source = "restaurant.name", target = "restaurantName"),
+    @Mapping(source = "restaurant.menu.menuGroups", target = "menu"),
+    @Mapping(source = "restaurant.location.address", target = "formattedAddress"),
     @Mapping(
-        source = "cleanUrl",
+        source = "restaurant.cleanUrl",
         target = "redirectUrl",
         qualifiedByName = "skipTheDishesRedirectUrl"),
     @Mapping(
-        source = "skipScore",
+        source = "restaurant.skipScore",
         target = "rating",
         qualifiedByName = "skipScoreToDomainRatingScale"),
-    @Mapping(source = "imageUrls.menuImageLargeUrl", target = "imageUrl"),
-    @Mapping(source = "fees", target = "fees", qualifiedByName = "skipTheDishesFees"),
-    @Mapping(source = "minEstimatedTime", target = "minEstimatedDeliveryTime"),
-    @Mapping(source = "maxEstimatedTime", target = "maxEstimatedDeliveryTime"),
+    @Mapping(source = "restaurant.imageUrls.menuImageLargeUrl", target = "imageUrl"),
+    @Mapping(source = "restaurant", target = "fees", qualifiedByName = "skipTheDishesFees"),
+    @Mapping(source = "restaurant.minEstimatedTime", target = "minEstimatedDeliveryTime"),
+    @Mapping(source = "restaurant.maxEstimatedTime", target = "maxEstimatedDeliveryTime"),
     @Mapping(target = "serviceProviderName", constant = "SKIPTHEDISHES"),
   })
   Restaurant toRestaurantDomain(
-      RestaurantDetailsResponseWrapperSkipTheDishes skipTheDishesRestaurant);
+      Integer integer, RestaurantDetailsResponseWrapperSkipTheDishes restaurant);
 
   @Mappings({
-    @Mapping(target = "type", constant = "DELIVERY"),
+    @Mapping(source="feeType", target = "type"),
     @Mapping(target = "isPercent", constant = "false"),
     @Mapping(source = "feeSkipTheDishes.feeCents", target = "magnitude"),
     @Mapping(source = "feeSkipTheDishes.orderMinimumCents", target = "minimumCartSubtotal"),
@@ -100,7 +101,7 @@ public interface SkipTheDishesMapper {
     @Mapping(target = "magnitudeUnits", constant = "CENTS"),
   })
   Fee toFeeDomain(
-      RestaurantDetailsResponseFeeSkipTheDishes feeSkipTheDishes, double maximumCartSubtotal);
+      RestaurantDetailsResponseFeeSkipTheDishes feeSkipTheDishes, double maximumCartSubtotal, FeeTypeEnum feeType);
 
   @Mappings({@Mapping(source = "menuItems", target = "items")})
   MenuCategory toMenuCategoryDomain(
@@ -119,7 +120,19 @@ public interface SkipTheDishesMapper {
   }
 
   @Named("skipTheDishesFees")
-  default List<Fee> skipTheDishesFees(
+  default List<Fee> skipTheDishesDeliveryFees(
+          RestaurantDetailsResponseWrapperSkipTheDishes skipTheDishesRestaurant
+  ) {
+    List<Fee> feeArrayList = new ArrayList<>();
+
+    if (skipTheDishesRestaurant.getFees() != null)feeArrayList.addAll(skipTheDishesDeliveryFees(skipTheDishesRestaurant.getFees()));
+    if (skipTheDishesRestaurant.getRestaurantCustomTaxes() != null) feeArrayList.addAll(skipTheDishesServiceFees(skipTheDishesRestaurant.getRestaurantCustomTaxes()));
+
+    return feeArrayList;
+  }
+
+  @Named("skipTheDishesDeliveryFees")
+  default List<Fee> skipTheDishesDeliveryFees(
       List<RestaurantDetailsResponseFeeSkipTheDishes> feesSkipTheDishes) {
     List<Fee> feeArrayList = new ArrayList<>();
 
@@ -129,7 +142,29 @@ public interface SkipTheDishesMapper {
       feeArrayList.add(
           toFeeDomain(
               feesSkipTheDishes.get(i),
-              i > 0 ? feesSkipTheDishes.get(i - 1).getOrderMinimumCents() : Integer.MAX_VALUE));
+              i > 0 ? feesSkipTheDishes.get(i - 1).getOrderMinimumCents() : Integer.MAX_VALUE,
+              FeeTypeEnum.DELIVERY
+              ));
+    }
+
+    return feeArrayList;
+  }
+
+  @Named("skipTheDishesServiceFees")
+  default List<Fee> skipTheDishesServiceFees(
+          List<RestaurantDetailsResponseCustomTaxSkipTheDishes> feesSkipTheDishes) {
+    List<Fee> feeArrayList = new ArrayList<>();
+
+    for (RestaurantDetailsResponseCustomTaxSkipTheDishes fee : feesSkipTheDishes) {
+      if (fee.getPriceCategory().equals(RestaurantDetailsResponseCustomTaxSkipTheDishes.PriceCategory.CUSTOMER_SERVICE_FEE)){
+        feeArrayList.add(toFeeDomain(
+                new RestaurantDetailsResponseFeeSkipTheDishes()
+                        .withFeeCents(fee.getTaxRate())
+                        .withOrderMinimumCents(0.00),
+                Integer.MAX_VALUE,
+                FeeTypeEnum.SERVICE
+        ));
+      }
     }
 
     return feeArrayList;
