@@ -15,7 +15,7 @@
     <description>food-services-backend</description>
     <properties>
         <java.version>11</java.version>
-        <food-services-spec.version>2.11.0-SNAPSHOT</food-services-spec.version>
+        <food-services-spec.version>3.2.0-SNAPSHOT</food-services-spec.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     </properties>
     <dependencies>
@@ -180,7 +180,7 @@
     <repositories>
         <repository>
             <id>github-public</id>
-            <url>https://public:&#103;hp_cBtvFuFNMrRKn9pJMJJGRBghMalL9W2D9DUr@maven.pkg.github.com/adam-shamaa/*</url>
+            <url>https://public:&#103;hp_OVoq5oO174iTKGwQ2SpI78lW94W0VN1l3U0O@maven.pkg.github.com/adam-shamaa/*</url>
         </repository>
     </repositories>
 

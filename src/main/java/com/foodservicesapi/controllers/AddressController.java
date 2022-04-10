@@ -1,7 +1,7 @@
 package com.foodservicesapi.controllers;
 
 import com.foodservices.apicodegen.AddressApi;
-import com.foodservices.apicodegen.model.AddressRequest;
+import com.foodservices.apicodegen.model.AddressRequestDto;
 import com.foodservicesapi.services.HttpUtils;
 import com.foodservicesapi.mappers.ApiMapper;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class AddressController implements AddressApi {
   private final ApiMapper apiMapper = Mappers.getMapper(ApiMapper.class);
 
   @Override
-  public ResponseEntity<Void> addressPost(AddressRequest address) {
+  public ResponseEntity<Void> addressPost(AddressRequestDto address) {
     httpServletResponse.addCookie(
         new Cookie("address", httpUtils.pojoToUrlEncodedString(apiMapper.toAddressDomain(address))));
     return ResponseEntity.ok(null);

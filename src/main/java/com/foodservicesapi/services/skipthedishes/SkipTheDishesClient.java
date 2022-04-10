@@ -4,12 +4,16 @@ import com.foodservicesapi.codegen.models.RestaurantDetailsRequestSkipTheDishes;
 import com.foodservicesapi.codegen.models.RestaurantDetailsResponseWrapperSkipTheDishes;
 import com.foodservicesapi.codegen.models.RestaurantsListRequestWrapperSkipTheDishes;
 import com.foodservicesapi.codegen.models.RestaurantsListResponseWrapperSkipTheDishes;
+import io.netty.handler.logging.LogLevel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.client.HttpClient;
+import reactor.netty.transport.logging.AdvancedByteBufFormat;
 
 @Slf4j
 @Component
@@ -18,8 +22,14 @@ public class SkipTheDishesClient {
   private final WebClient webClient;
 
   public SkipTheDishesClient() {
+    HttpClient httpClient = HttpClient
+            .create()
+            .wiretap("reactor.netty.http.client.HttpClient",
+                    LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL);
+
     this.webClient =
         WebClient.builder()
+            .clientConnector(new ReactorClientHttpConnector(httpClient))
             .exchangeStrategies(
                 ExchangeStrategies.builder()
                     .codecs(

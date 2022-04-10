@@ -1,8 +1,9 @@
 package com.foodservicesapi.controllers;
 
 import com.foodservices.apicodegen.RestaurantsApi;
-import com.foodservices.apicodegen.model.DetailedRestaurantResponse;
-import com.foodservices.apicodegen.model.SummaryRestaurantResponse;
+import com.foodservices.apicodegen.model.RestaurantDetailsResponseDto;
+import com.foodservices.apicodegen.model.RestaurantServiceProvidersResponseDto;
+import com.foodservices.apicodegen.model.RestaurantSummarysResponseDto;
 import com.foodservicesapi.models.domain.Restaurant;
 import com.foodservicesapi.services.HttpUtils;
 import com.foodservicesapi.mappers.ApiMapper;
@@ -30,23 +31,42 @@ public class RestaurantsController implements RestaurantsApi {
   private final HttpUtils httpUtils;
 
   @Override
-  public ResponseEntity<List<SummaryRestaurantResponse>> restaurantsGet(
+  public ResponseEntity<RestaurantSummarysResponseDto> restaurantsGet(
       @NotNull String address, @Valid String searchQuery) {
     Address addressPojo = httpUtils.UrlEncodedStringToPojo(address, Address.class);
     List<PairedRestaurantOverview> availableRestaurantsDomain =
         restaurantsService.getRestaurants(addressPojo, searchQuery);
-    return ResponseEntity.ok(apiMapper.toRestaurantPreviewListDTO(availableRestaurantsDomain));
+    return ResponseEntity.ok(
+            apiMapper.toRestaurantSummarysResponseDTO(
+                    null,
+                    apiMapper.toRestaurantPreviewListDTO(availableRestaurantsDomain)
+            )
+    );
   }
 
   @Override
-  public ResponseEntity<DetailedRestaurantResponse> restaurantsTemporaryRestaurantUUIDGet(
+  public ResponseEntity<RestaurantDetailsResponseDto> restaurantsTemporaryRestaurantUUIDGet(
       String temporaryRestaurantUUID,
-      @javax.validation.constraints.NotNull String address,
-      BigDecimal subtotal) {
-    Address addressPojo = httpUtils.UrlEncodedStringToPojo(address, Address.class);
+      @javax.validation.constraints.NotNull String address) {
+
     List<Restaurant> restaurantList =
-        restaurantsService.getRestaurant(addressPojo, temporaryRestaurantUUID);
+        restaurantsService.getRestaurant(
+                httpUtils.UrlEncodedStringToPojo(address, Address.class), temporaryRestaurantUUID);
+
     return ResponseEntity.ok(
-        apiMapper.toRestaurantAggregateDTO(null, restaurantList, subtotal.doubleValue()));
+        apiMapper.toRestaurantDetailsResponseDTO(
+                apiMapper.toRestaurantDetailsDTO(null, restaurantList))
+    );
+  }
+
+  @Override
+  public ResponseEntity<RestaurantServiceProvidersResponseDto> restaurantsTemporaryRestaurantUUIDServiceProvidersGet(String temporaryRestaurantUUID, @NotNull String address, @NotNull @Valid BigDecimal subtotalCents) {
+    List<Restaurant> restaurantList =
+            restaurantsService.getRestaurant(
+                    httpUtils.UrlEncodedStringToPojo(address, Address.class), temporaryRestaurantUUID);
+
+    return ResponseEntity.ok(
+            apiMapper.toRestaurantServiceProvidersResponse(null, restaurantList, subtotalCents.doubleValue())
+    );
   }
 }

@@ -6,9 +6,7 @@ import com.foodservicesapi.models.domain.enums.CurrencyUnitsEnum;
 import com.foodservicesapi.services.RestaurantUtils;
 import org.mapstruct.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -18,14 +16,31 @@ public interface ApiMapper {
 
   /*************************************** START - DTO TO DOMAIN ******************************************************/
 
-  Address toAddressDomain(com.foodservices.apicodegen.model.AddressRequest address);
+  @Mappings({
+          @Mapping(
+                  source = "addressRequestDto.address",
+                  target = "."
+          )
+  })
+  Address toAddressDomain(AddressRequestDto addressRequestDto);
 
   /**************************************** END - DTO TO DOMAIN ******************************************************/
 
   /*************************************** START - DOMAIN TO DTO ******************************************************/
 
   // ------------------------------------ START -  TO RestaurantPreviewDTO ---------------------------------------------
-  List<SummaryRestaurantResponse> toRestaurantPreviewListDTO(
+  @Mappings({
+          @Mapping(
+                  source = "restaurantSummaryDtoList",
+                  target = "availableRestaurants"
+          )
+  })
+  RestaurantSummarysResponseDto toRestaurantSummarysResponseDTO(
+          Integer ignoreDummyIntegerValue,
+          List<RestaurantSummaryDto> restaurantSummaryDtoList
+  );
+
+  List<RestaurantSummaryDto> toRestaurantPreviewListDTO(
       List<PairedRestaurantOverview> pairedRestaurantOverviewList);
 
   @Mappings({
@@ -51,7 +66,7 @@ public interface ApiMapper {
         target = "maxEstimatedDeliveryTime",
         qualifiedByName = "maxEstimatedDeliveryTimeRestaurantOverview")
   })
-  SummaryRestaurantResponse toRestaurantPreviewDTO(
+  RestaurantSummaryDto toRestaurantPreviewDTO(
       PairedRestaurantOverview pairedRestaurantOverview);
 
   @Named("minEstimatedDeliveryTimeRestaurantOverview")
@@ -97,13 +112,20 @@ public interface ApiMapper {
 
   // ------------------------------------ END - TO RestaurantPreviewDTO -----------------------------------------------
 
-  // ------------------------------------ START - TO RestaurantAggregateDTO --------------------------------------------
+  // ------------------------------------ START - TO RestaurantDetailsDTO --------------------------------------------
+  @Mappings({
+          @Mapping(
+                  source = "restaurantDetailsDto",
+                  target = "restaurantDetails"
+          )
+  })
+  RestaurantDetailsResponseDto toRestaurantDetailsResponseDTO(RestaurantDetailsDto restaurantDetailsDto);
 
   @Mappings({
     @Mapping(
         source = "restaurantList",
         target = "serviceProviders",
-        qualifiedByName = "toServiceProvidersList"),
+        qualifiedByName = "toServiceProviderNamesList"),
     @Mapping(source = "restaurantList", target = "name", qualifiedByName = "firstRestaurantName"),
     @Mapping(source = "restaurantList", target = "imageUrl", qualifiedByName = "firstImageUrl"),
     @Mapping(
@@ -117,29 +139,60 @@ public interface ApiMapper {
     @Mapping(
         source = "restaurantList",
         target = "maxEstimatedDeliveryTime",
-        qualifiedByName = "maxEstimatedDeliveryTimeRestaurantDetails")
+        qualifiedByName = "maxEstimatedDeliveryTimeRestaurantDetails"),
+    @Mapping(
+            source = "restaurantList",
+            target = "menu",
+            qualifiedByName = "firstMenuRestaurantDetails")
   })
-  DetailedRestaurantResponse toRestaurantAggregateDTO(
-      Integer dummyValueIgnore, List<Restaurant> restaurantList, @Context double subtotal);
+  RestaurantDetailsDto toRestaurantDetailsDTO(
+      Integer dummyValueIgnore, List<Restaurant> restaurantList);
+
+  List<MenuCategoryDto> toMenuCategoryDtoList(List<MenuCategory> menuCategory);
+
+  MenuCategoryDto toMenuCategoryDto(MenuCategory menuCategory);
+
+  @Named("toServiceProviderNamesList")
+  default List<ServiceProviderNameEnumDto> toServiceProviderNamesList(List<Restaurant> restaurantList) {
+    return restaurantList.stream().map(
+            restaurant -> Enum.valueOf( ServiceProviderNameEnumDto.class, restaurant.getServiceProviderName())
+    ).distinct().collect(Collectors.toList());
+  }
+
+  @Named("firstMenuRestaurantDetails")
+  default List<MenuCategoryDto> firstMenuRestaurantDetails(List<Restaurant> restaurantList) {
+    return toMenuCategoryDtoList(restaurantList.get(0).getMenu());
+  }
+
+
+  // ------------------------------------ START - TO ServiceProvidersDTO --------------------------------------------
+
+  @Mappings({
+          @Mapping(
+                  source = "restaurantList",
+                  target = "serviceProviders",
+                  qualifiedByName = "toServiceProvidersList"
+          )
+  })
+  RestaurantServiceProvidersResponseDto toRestaurantServiceProvidersResponse(Integer dummyInteger,
+          List<Restaurant> restaurantList, @Context double subtotal);
 
   @Named("toServiceProvidersList")
-  default List<ServiceProviderRestaurantResponse> toServiceProvidersList(
-      List<Restaurant> restaurantList, @Context double subtotal) {
-    List<ServiceProviderRestaurantResponse> mappedServiceProvidersList =
+  default List<RestaurantServiceProviderDto> toServiceProvidersList(List<Restaurant> restaurantList, @Context double subtotal) {
+
+    List<RestaurantServiceProviderDto> mappedServiceProvidersList =
         restaurantList.stream()
             .map(restaurant -> this.toServiceProviderDTO(restaurant, subtotal))
             .collect(Collectors.toList());
 
-    Map<ServiceProviderNameEnum, List<ServiceProviderRestaurantResponse>>
+    Map<ServiceProviderNameEnumDto, List<RestaurantServiceProviderDto>>
         serviceProvidersGroupedByServiceProvider =
             mappedServiceProvidersList.stream()
-                .collect(groupingBy(ServiceProviderRestaurantResponse::getServiceProviderName));
+                .collect(groupingBy(RestaurantServiceProviderDto::getServiceProviderName));
 
-    List<ServiceProviderRestaurantResponse> cheapestRestaurantForEachServiceProviderList =
-        new ArrayList<>();
+    List<RestaurantServiceProviderDto> cheapestRestaurantForEachServiceProviderList = new ArrayList<>();
 
-    for (List<ServiceProviderRestaurantResponse> serviceProvidersList :
-        serviceProvidersGroupedByServiceProvider.values()) {
+    for (List<RestaurantServiceProviderDto> serviceProvidersList : serviceProvidersGroupedByServiceProvider.values()) {
       cheapestRestaurantForEachServiceProviderList.add(
           cheapestServiceProvider(serviceProvidersList));
     }
@@ -149,36 +202,33 @@ public interface ApiMapper {
 
   @Mappings({
     @Mapping(source = "fees", target = "fees", qualifiedByName = "toFeesListDTO"),
-    @Mapping(source = "menu", target = "menu")
   })
-  ServiceProviderRestaurantResponse toServiceProviderDTO(
+  RestaurantServiceProviderDto toServiceProviderDTO(
       Restaurant restaurant, @Context double subtotal);
 
   @Mappings({
     @Mapping(source = "price", target = "magnitude"),
     @Mapping(source = "priceUnits", target = "magnitudeUnit")
   })
-  MenuItemResponse toMenuItemDTO(com.foodservicesapi.models.domain.MenuItem menuItem);
+  MenuItemDto toMenuItemDTO(com.foodservicesapi.models.domain.MenuItem menuItem);
 
   @Mapping(source = "fee", target = "magnitude", qualifiedByName = "feeMagnitude")
-  com.foodservices.apicodegen.model.FeeResponse toFeeDTO(Fee fee, @Context double subtotal);
+  com.foodservices.apicodegen.model.FeeDto toFeeDTO(Fee fee, @Context double subtotal);
 
   @AfterMapping
-  default void cheapestServiceProviderMapping(
-      @MappingTarget DetailedRestaurantResponse detailedRestaurantResponse) {
-    detailedRestaurantResponse.setCheapestServiceProvider(
-        cheapestServiceProvider(detailedRestaurantResponse.getServiceProviders())
-            .getServiceProviderName());
+  default void cheapestServiceProviderMapping(@MappingTarget RestaurantServiceProvidersResponseDto restaurantServiceProvidersResponseDto) {
+    restaurantServiceProvidersResponseDto
+            .setCheapestServiceProvider(
+                    cheapestServiceProvider(restaurantServiceProvidersResponseDto.getServiceProviders())
+                    .getServiceProviderName()
+            );
   }
 
-  default ServiceProviderRestaurantResponse cheapestServiceProvider(
-      List<ServiceProviderRestaurantResponse> serviceProviders) {
-
-    ServiceProviderRestaurantResponse cheapestServiceProvider = serviceProviders.get(0);
-
+  default RestaurantServiceProviderDto cheapestServiceProvider(List<RestaurantServiceProviderDto> serviceProviders) {
+    RestaurantServiceProviderDto cheapestServiceProvider = serviceProviders.get(0);
     double cheapestServiceProviderTotalFees = Double.MAX_VALUE;
 
-    for (ServiceProviderRestaurantResponse serviceProvider : serviceProviders) {
+    for (RestaurantServiceProviderDto serviceProvider : serviceProviders) {
       double totalFees =
           serviceProvider.getFees().stream()
               .mapToDouble(
@@ -236,8 +286,7 @@ public interface ApiMapper {
   }
 
   @Named("toFeesListDTO")
-  default List<com.foodservices.apicodegen.model.FeeResponse> toFeesListDTO(
-      List<Fee> fees, @Context double subtotal) {
+  default List<FeeDto> toFeesListDTO(List<Fee> fees, @Context double subtotal) {
     return fees.stream()
         .filter(
             fee ->
@@ -247,7 +296,7 @@ public interface ApiMapper {
   }
 
   @Named("feeMagnitude")
-  default double fee(Fee fee, @Context double subtotal) {
+  default double feeMagnitude(Fee fee, @Context double subtotal) {
     double expectedMagnitude = fee.isPercent() ? subtotal * fee.getMagnitude() : fee.getMagnitude();
     expectedMagnitude =
         expectedMagnitude > fee.getMaximumFeeMagnitude()
