@@ -69,6 +69,17 @@
     },
     "getFeedItemType": {
       "type": "string"
+    },
+    "pageInfo": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "number"
+        },
+        "pageSize": {
+          "type": "number"
+        }
+      }
     }
   }
 }

@@ -21,6 +21,8 @@ public interface UberEatsMapper {
   RestaurantsListRequestCookieWrapperUbereats toRestaurantsListsRequestCookie(Address address);
 
   @Mapping(source = "searchQuery", target = "userQuery")
+  @Mapping(target = "pageInfo.offset", constant = "1")
+  @Mapping(target = "pageInfo.pageSize", constant = "5000")
   RestaurantsListRequestBodyWrapperUbereats toRestaurantsListsRequestBody(String searchQuery);
 
   // ------------------------------------- END - RestaurantListsRequest ----------------------------------------------
