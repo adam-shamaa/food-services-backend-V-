@@ -12,4 +12,5 @@ public class MenuItem {
   private double price;
   private CurrencyEnum currency;
   private CurrencyUnitsEnum priceUnits;
+  private String imageUrl;
 }
