@@ -1,0 +1,28 @@
+name: Deploy
+on: [push]
+
+jobs:
+  build:
+    name: Build, push, and deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Create settings.xml
+        uses: whelk-io/maven-settings-xml-action@v4
+        with:
+          servers: '[{"id": "github", "username": "${{ secrets.GITHUB_USERNAME }}", "password": "${{ secrets.GITHUB_PASSWORD }}"}]'
+
+      - name: Build container image
+        run: mvn spring-boot:build-image
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
