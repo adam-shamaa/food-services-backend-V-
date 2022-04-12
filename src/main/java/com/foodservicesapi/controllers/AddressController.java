@@ -24,8 +24,12 @@ public class AddressController implements AddressApi {
 
   @Override
   public ResponseEntity<Void> addressPost(AddressRequestDto address) {
-    httpServletResponse.addCookie(
-        new Cookie("address", httpUtils.pojoToUrlEncodedString(apiMapper.toAddressDomain(address))));
+    Cookie cookie = new Cookie("address", httpUtils.pojoToUrlEncodedString(apiMapper.toAddressDomain(address)));
+    cookie.setHttpOnly(true);
+    cookie.setSecure(true);
+    cookie.setPath("/");
+
+    httpServletResponse.addCookie(cookie);
     return ResponseEntity.ok(null);
   }
 }
