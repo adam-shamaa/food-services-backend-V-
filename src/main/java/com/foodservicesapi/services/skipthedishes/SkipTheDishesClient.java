@@ -22,14 +22,8 @@ public class SkipTheDishesClient {
   private final WebClient webClient;
 
   public SkipTheDishesClient() {
-    HttpClient httpClient = HttpClient
-            .create()
-            .wiretap("reactor.netty.http.client.HttpClient",
-                    LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL);
-
     this.webClient =
         WebClient.builder()
-            .clientConnector(new ReactorClientHttpConnector(httpClient))
             .exchangeStrategies(
                 ExchangeStrategies.builder()
                     .codecs(

@@ -22,14 +22,8 @@ public class UberEatsClient {
   private final WebClient webClient;
 
   public UberEatsClient() {
-    HttpClient httpClient = HttpClient
-            .create()
-            .wiretap("reactor.netty.http.client.HttpClient",
-                    LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL);
-
     this.webClient =
         WebClient.builder()
-            .clientConnector(new ReactorClientHttpConnector(httpClient))
             .baseUrl("https://www.ubereats.com/api/")
             .exchangeStrategies(
                 ExchangeStrategies.builder()
