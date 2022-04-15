@@ -26,3 +26,11 @@ jobs:
         run: mvn spring-boot:build-image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Redeploy
+        run: doctl apps create-deployment 835681e2-232d-49f8-a313-498ffd09f940
