@@ -4,6 +4,7 @@ import com.foodservices.apicodegen.model.*;
 import com.foodservicesapi.models.domain.*;
 import com.foodservicesapi.models.domain.enums.CurrencyUnitsEnum;
 import com.foodservicesapi.services.RestaurantUtils;
+import info.debatty.java.stringsimilarity.JaroWinkler;
 import org.mapstruct.*;
 
 import java.util.*;
@@ -13,6 +14,8 @@ import static java.util.stream.Collectors.groupingBy;
 
 @Mapper
 public interface ApiMapper {
+
+  JaroWinkler jw = new JaroWinkler();
 
   /*************************************** START - DTO TO DOMAIN ******************************************************/
 
@@ -41,7 +44,8 @@ public interface ApiMapper {
   );
 
   List<RestaurantSummaryDto> toRestaurantPreviewListDTO(
-      List<PairedRestaurantOverview> pairedRestaurantOverviewList);
+      List<PairedRestaurantOverview> pairedRestaurantOverviewList,
+      @Context String searchQuery);
 
   @Mappings({
     @Mapping(source = "id", target = "id"),
@@ -108,6 +112,21 @@ public interface ApiMapper {
                     / restaurantOverviewList.size())
                 * 100.0)
         / 100.0;
+  }
+
+  @AfterMapping
+  default void sortRestaurantsBySearchQuery (
+          @MappingTarget List<RestaurantSummaryDto> pairedRestaurantOverviewList,
+          @Context String searchQuery
+  ) {
+    if (searchQuery.trim().length() == 0) {
+      return;
+    }
+
+    Map<String, Double> searchQuerySimilarity = new HashMap<>();
+    pairedRestaurantOverviewList.forEach(res -> searchQuerySimilarity.put(res.getName(), jw.similarity(searchQuery, res.getName())));
+
+    pairedRestaurantOverviewList.sort((ob1, ob2) -> Double.compare(searchQuerySimilarity.get(ob2.getName()), searchQuerySimilarity.get(ob1.getName())));
   }
 
   // ------------------------------------ END - TO RestaurantPreviewDTO -----------------------------------------------

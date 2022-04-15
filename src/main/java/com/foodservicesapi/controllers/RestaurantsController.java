@@ -39,7 +39,7 @@ public class RestaurantsController implements RestaurantsApi {
     return ResponseEntity.ok(
             apiMapper.toRestaurantSummarysResponseDTO(
                     null,
-                    apiMapper.toRestaurantPreviewListDTO(availableRestaurantsDomain)
+                    apiMapper.toRestaurantPreviewListDTO(availableRestaurantsDomain, searchQuery)
             )
     );
   }
