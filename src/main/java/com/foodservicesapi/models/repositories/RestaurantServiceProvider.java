@@ -4,6 +4,9 @@ import com.foodservicesapi.models.domain.enums.ServiceProviderEnum;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
 
 import java.util.Date;
 
@@ -12,5 +15,4 @@ import java.util.Date;
 public class RestaurantServiceProvider {
   private String serviceProviderRestaurantId;
   private ServiceProviderEnum serviceProvider;
-  @CreatedDate private Date createdAt;
 }
