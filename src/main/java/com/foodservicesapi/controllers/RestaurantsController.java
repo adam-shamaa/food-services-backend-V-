@@ -44,6 +44,8 @@ public class RestaurantsController implements RestaurantsApi {
             repoMapper.toRestaurantsSearchResult(
                     null,
                     repoMapper.toRestaurantListRepository(availableRestaurantsDomain),
+                    searchQuery,
+                    addressPojo.toString(),
                     httpUtils.getClientIpAddress()))) {
       return ResponseEntity.internalServerError().build();
     }

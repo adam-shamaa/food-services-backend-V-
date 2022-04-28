@@ -16,5 +16,7 @@ public class RestaurantsSearchResult {
     @Version private Long version;
     @CreatedDate private Date createdAt;
     private String userIP;
+    private String address;
+    private String searchQuery;
     List<Restaurant> restaurantList;
 }

@@ -19,10 +19,14 @@ public interface RepositoryMapper {
   @Mappings({
           @Mapping(source = "restaurantList", target = "restaurantList"),
           @Mapping(source = "userIP", target = "userIP"),
+          @Mapping(source = "address", target = "address"),
+          @Mapping(source = "searchQuery", target = "searchQuery"),
   })
   RestaurantsSearchResult toRestaurantsSearchResult(
           Integer dummyInteger,
           List<Restaurant> restaurantList,
+          String searchQuery,
+          String address,
           String userIP
   );
 
