@@ -5,7 +5,8 @@ import com.foodservicesapi.models.domain.Address;
 import com.foodservicesapi.models.domain.PairedRestaurantOverview;
 import com.foodservicesapi.models.domain.RestaurantOverview;
 import com.foodservicesapi.models.repositories.Restaurant;
-import com.foodservicesapi.repositories.RestaurantRepository;
+import com.foodservicesapi.models.repositories.RestaurantsSearchResult;
+import com.foodservicesapi.repositories.RestaurantsSearchRepository;
 import com.foodservicesapi.services.skipthedishes.SkipTheDishesService;
 import com.foodservicesapi.services.ubereats.UberEatsService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class RestaurantsService {
   private final RestaurantUtils restaurantUtils;
   private final SkipTheDishesService skipTheDishesService;
   private final UberEatsService uberEatsService;
-  private final RestaurantRepository restaurantRepository;
+  private final RestaurantsSearchRepository restaurantRepository;
   private final RepositoryMapper repositoryMapper = Mappers.getMapper(RepositoryMapper.class);
 
   /* ***********************************************  RestaurantLists  ************************************************ */
@@ -37,15 +38,13 @@ public class RestaurantsService {
     List<RestaurantOverview> availableRestaurants = fetchAndJoinRestaurantsFromServiceProviders(address, searchQuery, availableServiceProviders);
     Collection<List<RestaurantOverview>> listOfGroupedRestaurants = groupRestaurantOverviewsByAttributes(availableRestaurants);
     List<PairedRestaurantOverview> groupedRestaurantsDomainObjectList = groupedRestaurantsToPairedRestaurants(listOfGroupedRestaurants);
-    saveRestaurants(groupedRestaurantsDomainObjectList);
     return groupedRestaurantsDomainObjectList;
   }
 
   // ********************************************************************************************************************
 
-  public boolean saveRestaurants(List<PairedRestaurantOverview> pairedRestaurantOverviewList) {
-    restaurantRepository.insert(
-        repositoryMapper.toRestaurantListRepository(pairedRestaurantOverviewList));
+  public boolean saveRestaurantsSearchResult(RestaurantsSearchResult restaurantsSearchResult) {
+    restaurantRepository.insert(restaurantsSearchResult);
     return true;
   }
 
@@ -153,8 +152,11 @@ public class RestaurantsService {
   }
 
   public PairedRestaurantOverview fetchRestaurant(String id) {
-    Optional<Restaurant> retrievedRestaurant = restaurantRepository.findById(id);
-    if (!retrievedRestaurant.isPresent()) throw new IllegalArgumentException();
-    return repositoryMapper.toPairedRestaurantOverviewDomain(retrievedRestaurant.get());
+    List<RestaurantsSearchResult> restaurantsSearchResults = restaurantRepository.findByRestaurantList_Id(id);
+    if (restaurantsSearchResults.size() != 1) {
+      throw new IllegalArgumentException();
+    }
+    Restaurant restaurant = restaurantsSearchResults.get(0).getRestaurantList().stream().filter(res -> res.getId().equals(id)).findFirst().get();
+    return repositoryMapper.toPairedRestaurantOverviewDomain(restaurant);
   }
 }

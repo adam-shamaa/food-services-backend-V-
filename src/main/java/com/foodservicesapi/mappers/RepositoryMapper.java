@@ -4,6 +4,7 @@ import com.foodservicesapi.models.domain.PairedRestaurantOverview;
 import com.foodservicesapi.models.domain.RestaurantOverview;
 import com.foodservicesapi.models.repositories.Restaurant;
 import com.foodservicesapi.models.repositories.RestaurantServiceProvider;
+import com.foodservicesapi.models.repositories.RestaurantsSearchResult;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -14,18 +15,29 @@ import java.util.List;
 public interface RepositoryMapper {
   /*************************************** START - DOMAIN TO REPOSITORY ******************************************************/
 
+
+  @Mappings({
+          @Mapping(source = "restaurantList", target = "restaurantList"),
+          @Mapping(source = "userIP", target = "userIP"),
+  })
+  RestaurantsSearchResult toRestaurantsSearchResult(
+          Integer dummyInteger,
+          List<Restaurant> restaurantList,
+          String userIP
+  );
+
+  List<Restaurant> toRestaurantListRepository(
+          List<PairedRestaurantOverview> pairedRestaurantOverview);
+
+  @Mappings({@Mapping(source = "serviceProviderRestaurants", target = "serviceProviders")})
+  Restaurant toRestaurantRepository(PairedRestaurantOverview pairedRestaurantOverview);
+
   List<RestaurantServiceProvider> toRestaurantServiceProviderListRepository(
       List<RestaurantOverview> restaurantOverviewList);
 
   @Mappings({@Mapping(source = "id", target = "serviceProviderRestaurantId")})
   RestaurantServiceProvider toRestaurantServiceProviderRepository(
       RestaurantOverview restaurantOverview);
-
-  List<Restaurant> toRestaurantListRepository(
-      List<PairedRestaurantOverview> pairedRestaurantOverview);
-
-  @Mappings({@Mapping(source = "serviceProviderRestaurants", target = "serviceProviders")})
-  Restaurant toRestaurantRepository(PairedRestaurantOverview pairedRestaurantOverview);
 
   /**************************************** END - DOMAIN TO REPOSITORY ******************************************************/
 
