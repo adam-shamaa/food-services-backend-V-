@@ -185,14 +185,17 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>registry.digitalocean.com/food-services-aggregator/${project.artifactId}:${project.version}</name>
+                        <name>registry.heroku.com/food-services-backend/web</name>
+                        <env>
+                            <JAVA_TOOL_OPTIONS>-Xms999m</JAVA_TOOL_OPTIONS>
+                        </env>
                         <publish>true</publish>
                     </image>
                     <docker>
                         <publishRegistry>
-                            <url>registry.digitalocean.com</url>
-                            <username>dop_v1_85e9d3dd8ff52ad3a67da0fba5cfe1e45d2462f54d7305157dc256137a2a833c</username>
-                            <password>dop_v1_85e9d3dd8ff52ad3a67da0fba5cfe1e45d2462f54d7305157dc256137a2a833c</password>
+                            <url>registry.heroku.com</url>
+                            <username>_</username>
+                            <password>c29768f2-1968-45fa-b9f5-4c6de5ffe43f</password>
                         </publishRegistry>
                     </docker>
                 </configuration>
