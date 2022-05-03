@@ -15,7 +15,7 @@
     <description>food-services-backend</description>
     <properties>
         <java.version>11</java.version>
-        <food-services-spec.version>3.3.0-SNAPSHOT</food-services-spec.version>
+        <food-services-spec.version>3.5.1-SNAPSHOT</food-services-spec.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     </properties>
     <dependencies>
