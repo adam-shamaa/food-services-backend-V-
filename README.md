@@ -1,6 +1,7 @@
 # Food Services Aggregator Backend (V2)
 
 ## Table of Contents
+1. [Architecture](#Architecture)
 
 ## Architecture
 ### System Centric View
