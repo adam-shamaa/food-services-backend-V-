@@ -194,7 +194,7 @@
                         <publishRegistry>
                             <url>registry.heroku.com</url>
                             <username>_</username>
-                            <password>c29768f2-1968-45fa-b9f5-4c6de5ffe43f</password>
+                            <password>31ddccb1-ff91-4cdc-a04e-c1ece2c0563e</password>
                         </publishRegistry>
                     </docker>
                 </configuration>
