@@ -104,7 +104,7 @@ public interface UberEatsMapper {
                     .filter(listItem -> listItem.getText() != null)
                     .filter(listItem -> listItem.getText().contains("min"))
                     .findFirst();
-    return text != null && text.isPresent()
+    return text.isPresent()
         ? Integer.parseInt(text.get().getText().split(" ")[0].split(HYPHEN_REGEX)[1])
         : -1;
   }
