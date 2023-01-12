@@ -9,10 +9,12 @@ import org.mapstruct.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 @Mapper
 public interface UberEatsMapper {
 
   double uberEatsRatingOutOf = 5;
+  String HYPHEN_REGEX = "—|–|-";
 
   /*************************************** START - DOMAIN TO UberEatsDTO ******************************************************/
 
@@ -87,8 +89,8 @@ public interface UberEatsMapper {
             .filter(listItem -> listItem.getText() != null)
             .filter(listItem -> listItem.getText().contains("min"))
             .findFirst();
-    return text != null && text.isPresent()
-        ? Integer.parseInt(text.get().getText().split(" ")[0].split("–")[0])
+    return text.isPresent()
+        ? Integer.parseInt(text.get().getText().split(" ")[0].split(HYPHEN_REGEX)[0])
         : -1;
   }
 
@@ -103,7 +105,7 @@ public interface UberEatsMapper {
                     .filter(listItem -> listItem.getText().contains("min"))
                     .findFirst();
     return text != null && text.isPresent()
-        ? Integer.parseInt(text.get().getText().split(" ")[0].split("–")[1])
+        ? Integer.parseInt(text.get().getText().split(" ")[0].split(HYPHEN_REGEX)[1])
         : -1;
   }
 
@@ -176,12 +178,12 @@ public interface UberEatsMapper {
 
   @Named("firstDeliveryTimeDetailed")
   default int firstDeliveryTimeDetailed(RestaurantDetailsResponseEtaRangeUbereats etaRange) {
-    return etaRange != null ? Integer.parseInt(etaRange.getText().split(" ")[0].split("–")[0]) : -1;
+    return etaRange != null ? Integer.parseInt(etaRange.getText().split(" ")[0].split(HYPHEN_REGEX)[0]) : -1;
   }
 
   @Named("secondDeliveryTimeDetailed")
   default int secondDeliveryTimeDetailed(RestaurantDetailsResponseEtaRangeUbereats etaRange) {
-    return etaRange != null ? Integer.parseInt(etaRange.getText().split(" ")[0].split("–")[1]) : -1;
+    return etaRange != null ? Integer.parseInt(etaRange.getText().split(" ")[0].split(HYPHEN_REGEX)[1]) : -1;
   }
 
   @Named("toFeeListDomain")
