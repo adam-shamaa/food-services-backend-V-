@@ -20,3 +20,8 @@ All endpoints exposed through this server conform to an API contract hosted in a
 
 ### Component Centric View
 <img width="1244" alt="V3 - Component Diagram - C4 Model" src="https://user-images.githubusercontent.com/61364811/172213750-dfb3e1c9-6bc5-46dc-a511-762b576dde5e.png">
+
+## Additional Resources
+I've put together a [API client library](https://pastebin.com/UfCc5qrc) in [Insomnia](https://insomnia.rest/). It features API requests to currently delivery providers - SkipTheDishes, Ubereats and DoorDash in addiiton to API requests for the backend, including environments for development and prod servers. 
+
+Feel free to use it to play around with the various delivery service API's or the production server directly.
