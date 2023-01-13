@@ -1,7 +1,7 @@
 # Food Services Aggregator Backend (V2)
 
 ## Table of Contents
-1. [Getting Started](#Getting Started)
+1. [Getting Started](#Getting-Started)
 2. [API](#API)
 3. [Architecture](#Architecture)
 
