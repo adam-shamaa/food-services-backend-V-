@@ -4,6 +4,7 @@
 1. [Getting Started](#Getting-Started)
 2. [API](#API)
 3. [Architecture](#Architecture)
+4. [Additional Resources](#Additional-Resources)
 
 ## Getting Started
 - More details to come. Working out some issues with unauthorized read authentication of github maven packages.
