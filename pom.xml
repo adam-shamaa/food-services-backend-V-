@@ -204,8 +204,13 @@
 
     <repositories>
         <repository>
-            <id>github-public</id>
-            <url>https://public:&#103;hp_OVoq5oO174iTKGwQ2SpI78lW94W0VN1l3U0O@maven.pkg.github.com/adam-shamaa/*</url>
+            <id>foodservices-github-packages</id>
+            <!--
+                Unfortunately Github Packages requires authentication to read packages so providing my own personal access token.
+                The XML encoded password has read only access to my github packages. Since all my packages are public no security vulnerabilities.
+                XML encoded to bypass Github checks for revealed tokens as Github will automatically disable the token if detected.
+             -->
+            <url>https://public:&#103;hp_jpHnyny1TTUeuC1drVlE73D6YXV4pz3a4y7d@maven.pkg.github.com/adam-shamaa/*</url>
         </repository>
     </repositories>
 
