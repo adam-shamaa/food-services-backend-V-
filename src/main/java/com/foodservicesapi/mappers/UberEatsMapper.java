@@ -20,6 +20,10 @@ public interface UberEatsMapper {
 
   // ------------------------------------ START - RestaurantListsRequest ---------------------------------------------
 
+  @Mapping(source="city", target="addressComponents.city")
+  @Mapping(source="country", target="addressComponents.countryCode")
+  @Mapping(source="province", target="addressComponents.firstLevelSubdivisionCode")
+  @Mapping(source="postalCode", target="addressComponents.postalCode")
   RestaurantsListRequestCookieWrapperUbereats toRestaurantsListsRequestCookie(Address address);
 
   @Mapping(source = "searchQuery", target = "userQuery")

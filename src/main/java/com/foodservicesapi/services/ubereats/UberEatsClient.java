@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,7 +26,7 @@ public class UberEatsClient {
   public RestaurantsListResponseWrapperUbereats fetchRestaurantsLists(
           RestaurantsListRequestCookieWrapperUbereats requestCookie,
           RestaurantsListRequestBodyWrapperUbereats requestBody) {
-    return this.webClient
+      RestaurantsListResponseWrapperUbereats res = this.webClient
             .exchange(
                     "https://www.ubereats.com/api/getFeedV1",
                     HttpMethod.POST,
@@ -35,6 +36,7 @@ public class UberEatsClient {
                     }}),
                     RestaurantsListResponseWrapperUbereats.class
             ).getBody();
+      return res;
   }
 
   @SneakyThrows

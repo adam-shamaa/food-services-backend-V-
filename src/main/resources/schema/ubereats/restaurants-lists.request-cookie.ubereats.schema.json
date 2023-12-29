@@ -4,6 +4,23 @@
   "title": "Restaurants List Request Cookie Wrapper Ubereats",
   "type": "object",
   "properties": {
+    "addressComponents": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "firstLevelSubdivisionCode": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        }
+      }
+    },
     "latitude": {
       "type": "number"
     },
