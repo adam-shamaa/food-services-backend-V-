@@ -1,0 +1,14 @@
+# docker-compose config strictly for dev environment
+
+version: '3.8'
+services:
+    api:
+      build:
+        context: .
+        target: base
+      container_name: food-services-backend-api
+      command: mvn spring-boot:run
+      ports:
+        - 8080:8080
+      volumes:
+        - ./:/app
