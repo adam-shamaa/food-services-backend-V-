@@ -310,9 +310,6 @@
             "type": "string"
           }
         },
-        "distanceBadge": {
-          "type": "string"
-        },
         "fareInfo": {
           "title": "Restaurant Details Response Fare Info Ubereats",
           "type": "object",
