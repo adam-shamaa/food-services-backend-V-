@@ -20,7 +20,7 @@ public interface SkipTheDishesMapper {
     @Mapping(target = "extensions.persistedQuery.version", constant = "1"),
     @Mapping(
         target = "extensions.persistedQuery.sha256Hash",
-        constant = "e4650bd94c9d17af7fbc24dfc1475a6fb6f496a49d9e967dc40ef4e40cf747bc"),
+        constant = "b22f614ed8055139df97d570cfc76a8daf97ff46edb601098b354438db135b2d"),
     @Mapping(target = "variables.isDelivery", constant = "true"),
     @Mapping(target = "variables.language", constant = "en"),
     @Mapping(source = "address.city", target = "variables.city"),
