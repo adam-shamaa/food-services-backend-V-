@@ -20,11 +20,6 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Build container image
-        run: mvn spring-boot:build-image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: akhileshns/heroku-deploy@v3.12.12
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,6 +27,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          justlogin: true
-          
-      - run: heroku container:release web --app food-services-backend
+          usedocker: true
