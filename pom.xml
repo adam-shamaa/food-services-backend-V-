@@ -18,16 +18,8 @@
         <food-services-spec.version>3.5.1-SNAPSHOT</food-services-spec.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
 
+    <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -36,20 +28,24 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-mongodb</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>1.18.26</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.food-services</groupId>
             <artifactId>api-spec</artifactId>
@@ -57,12 +53,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>2.13.1</version>
         </dependency>
 
         <dependency>
@@ -72,37 +65,11 @@
         </dependency>
 
         <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-resolver-dns-native-macos</artifactId>
-            <version>4.1.86.Final</version>
-            <classifier>osx-aarch_64</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-mongodb</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>info.debatty</groupId>
             <artifactId>java-string-similarity</artifactId>
             <version>2.0.0</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -150,34 +117,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <name>registry.heroku.com/food-services-backend/web</name>
-                        <env>
-                            <JAVA_TOOL_OPTIONS>-Xms999m</JAVA_TOOL_OPTIONS>
-                        </env>
-                        <publish>true</publish>
-                    </image>
-                    <docker>
-                        <publishRegistry>
-                            <url>registry.heroku.com</url>
-                            <username>_</username>
-                            <password>31ddccb1-ff91-4cdc-a04e-c1ece2c0563e</password>
-                        </publishRegistry>
-                    </docker>
-                </configuration>
             </plugin>
         </plugins>
     </build>
 
     <repositories>
         <repository>
-            <id>foodservices-github-packages</id>
             <!--
-                Unfortunately Github Packages requires authentication to read packages so providing my own personal access token.
-                The XML encoded password has read only access to my github packages. Since all my packages are public no security vulnerabilities.
-                XML encoded to bypass Github checks for revealed tokens as Github will automatically disable the token if detected.
-             -->
+            Unfortunately Github Packages requires authentication to read packages so providing my own personal access token.
+            The XML encoded password has read only access to my github packages. Since all my packages are public no security vulnerabilities.
+            XML encoded to bypass Github checks for revealed tokens as Github will automatically disable the token if detected.
+            -->
+            <id>foodservices-github-packages</id>
             <url>https://public:&#103;hp_jpHnyny1TTUeuC1drVlE73D6YXV4pz3a4y7d@maven.pkg.github.com/adam-shamaa/*</url>
         </repository>
     </repositories>
