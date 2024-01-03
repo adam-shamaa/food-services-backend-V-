@@ -25,6 +25,7 @@
 - Docker 
 - Github Actions
 - MongoDB
+- Heroku
 
 ## Overview
 This repository houses the API for the food-services-aggregator application.
