@@ -5,7 +5,8 @@
 ## Table of Contents
 1. [Technologies](#Technologies)
 2. [Overview](#Overview)
-   1. [Architecture](#Architecture)
+   1. [API Contract](#API-Contract)
+   2. [Architecture](#Architecture)
       1. [System Centric View](#System-Centric-View)
       2. [Container Centric View](#Container-Centric-View)
       3. [Component Centric View](#Component-Centric-View)
@@ -28,6 +29,9 @@
 This repository houses the API for the food-services-aggregator application.
 
 The main objective is to expose an API which enables information aggregation from delivery services (i.e. SkipTheDishes, UberEats, ...)  such as available restaurants and their delivery prices, service fees & menu items.
+
+### API Contract
+This server conforms to OpenAPI specification housed in a [seperate repository](#https://github.com/adam-shamaa/food-services-aggregator-spec) which publishes auto-generated stubs & classes to a package at _Github Maven Apache Registry_ consumed by this project.
 
 ### Architecture  
 
