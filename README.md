@@ -24,6 +24,7 @@
   - mapstruct-annotation-processor
 - Docker 
 - Github Actions
+- MongoDB
 
 ## Overview
 This repository houses the API for the food-services-aggregator application.
